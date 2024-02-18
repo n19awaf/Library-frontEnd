@@ -1,14 +1,13 @@
 import { ReturnBook } from "./ReturnBook";
 import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
-import { error } from "console";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import { Link } from "react-router-dom";
 
 export const Carousel = () => {
 
     const [book, setBooks] = useState<BookModel[]>([]);
-    const [isloading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
     useEffect(() =>{
@@ -51,7 +50,7 @@ export const Carousel = () => {
 
     },[]);
 
-    if (isloading) {
+    if (isLoading) {
         return(
             <SpinnerLoading/>
         )
@@ -67,7 +66,7 @@ export const Carousel = () => {
 
 
     return(
-        <div className="div container mt-5" style={{height: 550}}>
+        <div className="container mt-5" style={{height: 550}}>
             <div className="homepage-carousel-title">
                 <h3>Find your next "I stayed up too late reading" book.</h3>
             </div>

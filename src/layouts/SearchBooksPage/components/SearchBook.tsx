@@ -3,17 +3,21 @@ import BookModel from "../../../models/BookModel";
 
 export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
     return (
+        //rounded: يضيف هذا النمط حواف مستديرة للعنصر لجعله أكثر نعومة.
         <div className="card mt-3 shadow p-3 mb-3 bg-body rounded">
+            {/**g-0: يزيل جميع المسافات بين عناصر الصف. */}
             <div className="row g-0">
-                <div className="col-md-2">
-                    <div className="d-none d-lg-block text-center">
+                {/**justify-content-center: هذه الفئة تُستخدم لتوسيط العناصر في اتجاه الرأسي (أفقيًا) داخل عنصر Flexbox. 
+                /// align-items-center: هذه الفئة تُستخدم لتوسيط العناصر في اتجاه العمود (عموديًا) داخل عنصر Flexbox.  */}
+                <div className="col-md-2 d-flex justify-content-center align-items-center">
+                    <div className="d-none d-lg-block">
                         {props.book.img ?
-                            <img className="mt-4" src={props.book.img} 
+                            <img   src={props.book.img} 
                                 width="123" 
                                 height="196" 
                                 alt="Book" />
                         :
-                        <img className="mt-4"
+                        <img 
                             src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
                             width="123"
                             height="196"
@@ -21,14 +25,15 @@ export const SearchBook: React.FC<{ book: BookModel }> = (props) => {
                         />
                         }
                     </div>
+                    {/**Mobile */}
                     <div className="d-lg-none d-flex justify-content-center align-items-center">
                         {props.book.img ?
-                            <img className="mt-4" src={props.book.img} 
+                            <img  src={props.book.img} 
                                 width="123" 
                                 height="196" 
                                 alt="Book" />
                         :
-                        <img className="mt-4"
+                        <img 
                             src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
                             width="123"
                             height="196"
