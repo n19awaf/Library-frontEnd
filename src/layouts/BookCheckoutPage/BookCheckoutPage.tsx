@@ -88,7 +88,25 @@ export const BookCheckoutPage = () => {
             </div>
             {/**Mobile */}
             <div className="container d-lg-none mt-5">
-                
+                <div className="d-flex justify-content-center align-item-center">
+                        {book?.img ?
+                        <img src={book?.img} width='226' height='349' alt="Book"/>
+                        :
+                        <img
+                            src={require("./../../Images/BooksImages/book-luv2code-1000.png")}
+                            width="226"
+                            height="349"
+                            alt="Book"/>
+                        }
+                </div>
+                <div className="mt-4">
+                    <div className="ml-2">
+                        <h2>{book?.title}</h2>
+                        <h5 className="text-primary">{book?.author}</h5>
+                        <p className="lead">{book?.description}</p>
+                    </div>
+                </div>
+                <hr />
             </div>
         </div>
     );
