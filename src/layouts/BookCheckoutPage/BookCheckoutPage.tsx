@@ -16,7 +16,7 @@ export const BookCheckoutPage = () => {
 
     //Review state
     const [reviews, setReviews] = useState<ReviewModel[]>([]);
-    const [totalStars, setTotalStars] = useState(true);
+    const [totalStars, setTotalStars] = useState(0);
     const [isLoadingReview, setIsLoadingReview] = useState(true);
 
 
@@ -71,7 +71,7 @@ export const BookCheckoutPage = () => {
 
             const loadedReviews: ReviewModel[] = [];
 
-            let weightStarReviews: number = 0;
+            let weightedStarReviews: number = 0;
 
             for (const key in responsDate){
                 loadedReviews.push({
@@ -82,11 +82,11 @@ export const BookCheckoutPage = () => {
                     book_id:responsDate[key].bookId,
                     reviewDescription:responsDate[key].reviewDescription,
                 });
-                weightStarReviews = weightStarReviews + responsDate[key].rating;
+                weightedStarReviews = weightedStarReviews + responsDate[key].rating;
             }
 
             if (loadedReviews) {
-                const round = (Math.round((weightStarReviews / loadedReviews.length) * 2) / 2).toFixed(1);
+                const round = (Math.round((weightedStarReviews / loadedReviews.length) * 2) / 2).toFixed(1);
                 setTotalStars(Number(round));
             }
             setReviews(loadedReviews);
