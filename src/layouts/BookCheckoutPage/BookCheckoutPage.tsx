@@ -4,7 +4,8 @@ import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { StarsReview } from "../Utils/StarsReview";
 import { CheckoutAndReviewBok } from "./CheckoutAndReviewBok";
 import ReviewModel from "../../models/ReviewModel";
-import { error } from "console";
+import { LatesReviews } from "./LatesReviews";
+
 
 
 
@@ -58,7 +59,7 @@ export const BookCheckoutPage = () => {
     //Review useEffect 
     useEffect(() => {
         const fetchBookReviews = async () => {
-            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findBuBookId?=${bookId}`;
+            const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
 
             const responseReviews = await fetch(reviewUrl);
 
@@ -67,7 +68,7 @@ export const BookCheckoutPage = () => {
             }
             const responseJsonReviews = await responseReviews.json();
 
-            const responsDate = responseJsonReviews._embadeed.reviews;
+            const responsDate = responseJsonReviews._embedded.reviews;
 
             const loadedReviews: ReviewModel[] = [];
 
@@ -134,12 +135,13 @@ export const BookCheckoutPage = () => {
                             <p className="lead">
                                 {book?.description}
                             </p>
-                            <StarsReview rating={4.5} size={32}/>
+                            <StarsReview rating={totalStars} size={32}/>
                         </div>
                     </div>
                     <CheckoutAndReviewBok book={book} mobile={false}/>
                 </div>
                 <hr />
+                <LatesReviews reviews={reviews} bookId={book?.id} mobile={false}/> 
             </div>
             {/**Mobile */}
             <div className="container d-lg-none mt-5">
@@ -159,10 +161,12 @@ export const BookCheckoutPage = () => {
                         <h2>{book?.title}</h2>
                         <h5 className="text-primary">{book?.author}</h5>
                         <p className="lead">{book?.description}</p>
-                        <StarsReview rating={4.5} size={32}/>
+                        <StarsReview rating={totalStars} size={32}/>
                     </div>
                 </div>
                 <CheckoutAndReviewBok book={book} mobile={true}/>
+                <hr />
+                <LatesReviews reviews={reviews} bookId={book?.id} mobile={true}/> 
                 <hr />
             </div>
         </div>
