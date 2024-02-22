@@ -17,6 +17,7 @@ export const StarsReview: React.FC<{rating: number, size: number}> = (props) => 
             }else if (rating === .5){
                 halfStar = halfStar + 1;
                 rating = rating - .5;
+            // eslint-disable-next-line eqeqeq
             }else if (rating == 0){
                 emptuStar = emptuStar + 1;
             }else {
