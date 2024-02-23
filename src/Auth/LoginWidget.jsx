@@ -1,7 +1,7 @@
 import { Redirect } from "react-router-dom";
 import { useOktaAuth } from "@okta/okta-react";
 import { SpinnerLoading } from "../layouts/Utils/SpinnerLoading";
-import OktaSignInWidget from "./OktaSigninWidget";
+import {OktaSignInWidget} from "./OktaSignInWidget";
 
 const LoginWedget = ({config}) => {
     const {oktaAuth, authState} = useOktaAuth();
