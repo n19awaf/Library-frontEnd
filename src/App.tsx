@@ -7,6 +7,8 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { BookCheckoutPage } from './layouts/BookCheckoutPage/BookCheckoutPage';
 import { oktaConfig } from './lib/oktaConfig';
 import {OktaAuth, toRelativeUrl} from '@okta/okta-auth-js';
+import { LoginCallback, Security } from '@okta/okta-react';
+import LoginWedget from './Auth/LoginWidget';
 
 
 
@@ -28,25 +30,31 @@ export const App = () =>{
 
     //D-flex: يشير إلى استخدام CSS Flexbox لترتيب عناصر الواجهة أفقيًا أو رأسيًا. Flexbox هو نمط تخطيط مرن يسمح بترتيب وتنظيم عناصر الواجهة بطريقة سهلة ومرنة.
     <div className='d-flex flex-column min-vh-100'>
-      <Navbar/>
-      {/* هذا يعني أن العنصر سينمو ليملأ المساحة المتاحة */}
-      <div className='flex-grow-1'>
-          <Switch>
-          <Route path='/' exact>
-          <Redirect to='/home'/>
-          </Route>
-          <Route path='/home'>
-            <HomePage/>
-          </Route>
-          <Route path='/search'>
-          <SearchBooksPage/>
-          </Route>
-          <Route path='/checkout/:bookId'>
-            <BookCheckoutPage/>
-          </Route>
-        </Switch>
-      </div>
-      <Footer/>
+      <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri} onAuthRequired={customAuthHandler}>
+        <Navbar/>
+        {/* هذا يعني أن العنصر سينمو ليملأ المساحة المتاحة */}
+        <div className='flex-grow-1'>
+            <Switch>
+            <Route path='/' exact>
+            <Redirect to='/home'/>
+            </Route>
+            <Route path='/home'>
+              <HomePage/>
+            </Route>
+            <Route path='/search'>
+            <SearchBooksPage/>
+            </Route>
+            <Route path='/checkout/:bookId'>
+              <BookCheckoutPage/>
+            </Route>
+            <Route path='/login'
+              render={() => <LoginWedget config={oktaConfig}/>}
+              />
+              <Route path='/login/callback' component={LoginCallback}/>
+          </Switch>
+        </div>
+        <Footer/>
+      </Security>
     </div>
     
   );
