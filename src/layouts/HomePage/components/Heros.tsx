@@ -6,6 +6,7 @@ export const Heros = () => {
     const {authState} = useOktaAuth();
 
     return (
+        /** Laptop Heros */
         <div>
             <div className="d-none d-lg-block">
                 <div className="row g-0 mt-5">
@@ -47,7 +48,7 @@ export const Heros = () => {
                 </div>
             </div>
             {/** Mobile Heros */}
-            <div className="div d-lg-none">
+            <div className="d-lg-none">
                 <div className="container">
                     <div className="m-2">
                         <div className="col-image-left"></div>
