@@ -203,7 +203,7 @@ export const BookCheckoutPage = () => {
         <div>
             <div className="container d-none d-lg-block">
                 <div className="row mt-5">
-                    <div className="col-sm-2 col-md-2">
+                    <div className="col-sm-2 col-md-3">
                         {book?.img ?
                         <img src={book?.img} width='226' height='349' alt="Book"/>
                         :
@@ -214,7 +214,7 @@ export const BookCheckoutPage = () => {
                             alt="Book"/>
                         }
                     </div>
-                    <div className="container col-4 col-md-4">
+                    <div className="container col-4 col-md-5">
                         <div className="ml-2">
                             <h2>{book?.title}</h2>
                             <h5 className="text-primary">{book?.author}</h5>
