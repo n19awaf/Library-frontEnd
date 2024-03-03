@@ -6,6 +6,7 @@ import { CheckoutAndReviewBok } from "./CheckoutAndReviewBok";
 import ReviewModel from "../../models/ReviewModel";
 import { LatesReviews } from "./LatesReviews";
 import { useOktaAuth } from "@okta/okta-react";
+import { error } from "console";
 
 
 
@@ -17,11 +18,16 @@ export const BookCheckoutPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
-    //Review state
+    //Review state 
     const [reviews, setReviews] = useState<ReviewModel[]>([]);
     const [totalStars, setTotalStars] = useState(0);
     const [isLoadingReview, setIsLoadingReview] = useState(true);
     
+    // Review statat for commint
+    const [isReviewLeft, setIsReviewLeft] = useState(false)
+    const [isLoadingUserReview, setIsLoadingUserReview] = useState(true);
+
+
     //loans Count State
     const [currentLoansCount, setCurrentLoansCount] = useState(0);
     const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] = useState(true);
@@ -33,6 +39,7 @@ export const BookCheckoutPage = () => {
 
     const bookId = (window.location.pathname).split('/')[2];
 
+    //fetchBook
     useEffect(() =>{
         const fetchBook = async () => {
             const baseUrl: string = `http://localhost:8080/api/books/${bookId}`;
@@ -66,7 +73,7 @@ export const BookCheckoutPage = () => {
         })
     },[isCheckedout]);
 
-    //Review useEffect 
+    // books Review useEffect 
     useEffect(() => {
         const fetchBookReviews = async () => {
             const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
@@ -108,6 +115,18 @@ export const BookCheckoutPage = () => {
             setHttpError(error.message);
         })
     },[]);
+
+    //get a single reviews for user
+    useEffect(() => {
+        const fetchUserReviewBook = async () => {
+
+        }
+        fetchUserReviewBook().catch((error: any) => {
+            setIsLoadingUserReview(false);
+            setHttpError(error.message);
+        })
+
+    },[authState]);
 
     //loans Count useEffect
     useEffect(() => {
