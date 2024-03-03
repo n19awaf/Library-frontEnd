@@ -3,12 +3,14 @@ import BookModel from "../../models/BookModel";
 
 export const CheckoutAndReviewBok: React.FC<{book:BookModel | undefined, mobile: boolean,
             currentLoansCount: number, isAuthenticated: any, isChekedOut:boolean,
-            checkoutBook: any}> = (props) => {
-
+            checkoutBook: any, isReviewLeft: boolean}> = (props) => {
+        
+        // singin and checkbook function
         function buttonRender() {
             if (props.isAuthenticated){
                 if (!props.isChekedOut && props.currentLoansCount < 5) {
-                    return (<button onClick={() => props.checkoutBook()} className="btn btn-success btn-lg">Checkout</button>)
+                    return (
+                    <button onClick={() => props.checkoutBook()} className="btn btn-success btn-lg">Checkout</button>)
                 }else if (props.isChekedOut){
                     return (<p><b>Book checked out. Enjoy!</b></p>)
                 }else if (!props.isChekedOut){
@@ -16,6 +18,16 @@ export const CheckoutAndReviewBok: React.FC<{book:BookModel | undefined, mobile:
                 }
             }
             return (<Link to={'/login'} className="btn btn-success btn-lg">Sign in</Link>)
+        }
+
+        // function for review 
+        function reviewRender() {
+            if (props.isAuthenticated && !props.isReviewLeft){
+                return(<p>Leave a review component here.</p>)
+            }else if (props.isAuthenticated){
+                return(<p><b>Thank you for your review!</b></p>)
+            }
+            return (<div><hr/><p>Sign in to be able to leave a review.</p></div>)
         }
 
     return(
@@ -46,7 +58,7 @@ export const CheckoutAndReviewBok: React.FC<{book:BookModel | undefined, mobile:
                 {buttonRender()}
                 <hr />
                 <p className="mt-3">This number can change until placing order has been complete.</p>
-                <p>Sign in to able to leave a review.</p>
+                {reviewRender()}
             </div>
         </div>
     );
