@@ -4,7 +4,7 @@ import ReviewModel from "../../../models/ReviewModel"
 export const ReviewListPage = () => {
 
     const [reviews, setReviews] = useState<ReviewModel[]>([]);
-    const [isloading, setIsloading] = useState(true);
+    const [isloading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
     //Pagination
@@ -28,9 +28,10 @@ export const ReviewListPage = () => {
 
             const responsDate = responseJsonReviews._embedded.reviews;
 
-            const loadedReviews: ReviewModel[] = [];
+            setTotalAmountOfReviews(responseJsonReviews.page.totalElements);
+            setTotalPages(responseJsonReviews.page.totalPages);
 
-            let weightedStarReviews: number = 0;
+            const loadedReviews: ReviewModel[] = [];
 
             for (const key in responsDate){
                 loadedReviews.push({
@@ -41,21 +42,16 @@ export const ReviewListPage = () => {
                     book_id:responsDate[key].bookId,
                     reviewDescription:responsDate[key].reviewDescription,
                 });
-                weightedStarReviews = weightedStarReviews + responsDate[key].rating;
             }
 
-            if (loadedReviews) {
-                const round = (Math.round((weightedStarReviews / loadedReviews.length) * 2) / 2).toFixed(1);
-                setTotalStars(Number(round));
-            }
             setReviews(loadedReviews);
-            setIsLoadingReview(false);
+            setIsLoading(false);
         };
         fetchBookReviews().catch((error: any) => {
-            setIsLoadingReview(false);
+            setIsLoading(false);
             setHttpError(error.message);
         })
-    },[isReviewLeft]);
+    },[currentPage]);
 
 
 
