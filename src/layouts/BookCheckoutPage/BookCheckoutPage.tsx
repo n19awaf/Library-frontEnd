@@ -246,7 +246,7 @@ export const BookCheckoutPage = () => {
         }
 
         const reviewRequestModel = new ReviewRequestModel(starInput, bookId, reviewDescription);
-        const url = `http://localhost:8080/api/review/secure`;
+        const url = `http://localhost:8080/api/reviews/secure`;
         const requestOptions = {
             method:'POST',
             headers:{
@@ -290,7 +290,7 @@ export const BookCheckoutPage = () => {
                         </div>
                     </div>
                     <CheckoutAndReviewBok book={book} mobile={false} currentLoansCount={currentLoansCount} isAuthenticated={authState?.isAuthenticated}
-                        isChekedOut={isCheckedout} checkoutBook={checkoutBook} isReviewLeft={isReviewLeft}/>
+                        isChekedOut={isCheckedout} checkoutBook={checkoutBook} isReviewLeft={isReviewLeft} submitReview={submitReview}/>
                 </div>
                 <hr />
                 <LatesReviews reviews={reviews} bookId={book?.id} mobile={false}/> 
@@ -316,8 +316,8 @@ export const BookCheckoutPage = () => {
                         <StarsReview rating={totalStars} size={32}/>
                     </div>
                 </div>
-                <CheckoutAndReviewBok book={book} mobile={true} currentLoansCount={currentLoansCount} 
-                    isAuthenticated={authState?.isAuthenticated} isChekedOut={isCheckedout}  checkoutBook={checkoutBook} isReviewLeft={isReviewLeft}/>
+                <CheckoutAndReviewBok book={book} mobile={true} currentLoansCount={currentLoansCount} isAuthenticated={authState?.isAuthenticated}
+                    isChekedOut={isCheckedout}  checkoutBook={checkoutBook} isReviewLeft={isReviewLeft} submitReview={submitReview}/>
                 <hr />
                 <LatesReviews reviews={reviews} bookId={book?.id} mobile={true}/> 
                 <hr />
