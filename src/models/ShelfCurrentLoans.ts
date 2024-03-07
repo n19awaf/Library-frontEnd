@@ -9,3 +9,5 @@ class ShelfCurrentLoans {
         this.daysLeft = daysLeft;
     }
 }
+
+export default ShelfCurrentLoans;
