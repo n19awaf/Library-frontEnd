@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ShelfCurrentLoans from "../../../models/ShelfCurrentLoans";
 import { error } from "console";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Link } from "react-router-dom";
 
 export const Loans = () => {
 
@@ -77,7 +78,33 @@ export const Loans = () => {
                                     </div>
                                     <div className="card col-3 col-md-3 container d-flex">
                                         <div className="card-body">
-                                            
+                                            <div className="mt-3">
+                                                <h4>Loan Option</h4>
+                                                {shelfCurrentLoan.daysLeft > 0 && 
+                                                    <p className="text-secondary">
+                                                        Due in {shelfCurrentLoan.daysLeft} days.
+                                                    </p>
+                                                }
+                                                {shelfCurrentLoan.daysLeft === 0 &&
+                                                    <p className="text-success">
+                                                        Due Today.
+                                                    </p>
+                                                }
+                                                {shelfCurrentLoan.daysLeft < 0 &&
+                                                    <p className="text-danger">
+                                                        Past Due by {shelfCurrentLoan.daysLeft} days.
+                                                    </p>
+                                                }
+                                                <div className="list-group mt-3">
+                                                    <button className="list-group-item list-group-item-action" aria-current="true"
+                                                        data-bs-toggle="modal" data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
+                                                            Manage Loan 
+                                                        </button>
+                                                        <Link to={'search'} className="list-group-item list-group-item-action">
+                                                            Search more Books?
+                                                        </Link>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
