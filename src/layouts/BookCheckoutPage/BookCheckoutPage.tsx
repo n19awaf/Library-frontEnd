@@ -6,7 +6,6 @@ import { CheckoutAndReviewBok } from "./CheckoutAndReviewBok";
 import ReviewModel from "../../models/ReviewModel";
 import { LatesReviews } from "./LatesReviews";
 import { useOktaAuth } from "@okta/okta-react";
-import { error } from "console";
 import ReviewRequestModel from "../../models/ReviewRequestModel";
 
 
