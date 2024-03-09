@@ -56,5 +56,38 @@ export const Loans = () => {
         );
     }
 
-    return();
+    return(
+
+        <div>
+            {/*Desltop*/}
+            <div className="d-none d-lg-block mt-2">
+                {shelfCurrentLoans.length > 0 ?
+                    <>
+                        <h5>Current Loans</h5>
+
+                        {shelfCurrentLoans.map(shelfCurrentLoan => (
+                            <div key={shelfCurrentLoan.book.id}>
+                                <div className="row mt-3 mb-3">
+                                    <div className="col-4 col-md-4 container">
+                                        {shelfCurrentLoan.book?.id ?
+                                            <img src={shelfCurrentLoan.book?.img} width="226" height="349" alt="Book"/>
+                                            :
+                                            <img src={require("./../../../Images/BooksImages/book-luv2code-1000.png")} width="226" height="349" alt="Book" />
+                                        }
+                                    </div>
+                                    <div className="card col-3 col-md-3 container d-flex">
+                                        <div className="card-body">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </>
+                }
+            </div>
+
+            {/*Mobile*/}
+        </div>
+    );
 }
