@@ -64,7 +64,7 @@ export const Loans = () => {
             <div className="d-none d-lg-block mt-2">
                 {shelfCurrentLoans.length > 0 ?
                     <>
-                        <h5>Current Loans</h5>
+                        <h5>Current Loans:</h5>
 
                         {shelfCurrentLoans.map(shelfCurrentLoan => (
                             <div key={shelfCurrentLoan.book.id}>
@@ -100,16 +100,32 @@ export const Loans = () => {
                                                         data-bs-toggle="modal" data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
                                                             Manage Loan 
                                                         </button>
-                                                        <Link to={'search'} className="list-group-item list-group-item-action">
+                                                        <Link to={`search`} className="list-group-item list-group-item-action">
                                                             Search more Books?
                                                         </Link>
                                                 </div>
                                             </div>
+                                            <hr />
+                                            <p className="mt-3">
+                                                Help other find their adventure by reviewing your loan.
+                                            </p>
+                                            <Link to={`/checkout/${shelfCurrentLoan.book.id}`} className="btn btn-primary">
+                                                Leave a review
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
+                                <hr />
                             </div>
                         ))}
+                    </>:
+                    <>
+                    <h3 className="mt-3">
+                        Currently no Loans
+                    </h3>
+                    <Link to={`search`} className="btn btn-primary">
+                        Search for a new book
+                    </Link>
                     </>
                 }
             </div>
