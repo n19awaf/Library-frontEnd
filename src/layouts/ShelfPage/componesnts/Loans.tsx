@@ -131,6 +131,74 @@ export const Loans = () => {
             </div>
 
             {/*Mobile*/}
+            <div className="container d-lg-none mt-2">
+                {shelfCurrentLoans.length > 0 ?
+                    <>
+                        <h5 className="mb-3">Current Loans:</h5>
+
+                        {shelfCurrentLoans.map(shelfCurrentLoan => (
+                            <div key={shelfCurrentLoan.book.id}>
+                                
+                                    <div className="d-flex justify-content-center align-items-center">
+                                        {shelfCurrentLoan.book?.id ?
+                                            <img src={shelfCurrentLoan.book?.img} width="226" height="349" alt="Book"/>
+                                            :
+                                            <img src={require("./../../../Images/BooksImages/book-luv2code-1000.png")} width="226" height="349" alt="Book" />
+                                        }
+                                    </div>
+                                    <div className="card d-flex mt-5 mb-3">
+                                        <div className="card-body container">
+                                            <div className="mt-3">
+                                                <h4>Loan Option</h4>
+                                                {shelfCurrentLoan.daysLeft > 0 && 
+                                                    <p className="text-secondary">
+                                                        Due in {shelfCurrentLoan.daysLeft} days.
+                                                    </p>
+                                                }
+                                                {shelfCurrentLoan.daysLeft === 0 &&
+                                                    <p className="text-success">
+                                                        Due Today.
+                                                    </p>
+                                                }
+                                                {shelfCurrentLoan.daysLeft < 0 &&
+                                                    <p className="text-danger">
+                                                        Past Due by {shelfCurrentLoan.daysLeft} days.
+                                                    </p>
+                                                }
+                                                <div className="list-group mt-3">
+                                                    <button className="list-group-item list-group-item-action" aria-current="true"
+                                                        data-bs-toggle="#mobilemodal" data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
+                                                            Manage Loan 
+                                                        </button>
+                                                        <Link to={`search`} className="list-group-item list-group-item-action">
+                                                            Search more Books?
+                                                        </Link>
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <p className="mt-3">
+                                                Help other find their adventure by reviewing your loan.
+                                            </p>
+                                            <Link to={`/checkout/${shelfCurrentLoan.book.id}`} className="btn btn-primary">
+                                                Leave a review
+                                            </Link>
+                                        </div>
+                                    </div>
+                                
+                                <hr />
+                            </div>
+                        ))}
+                    </>:
+                    <>
+                    <h3 className="mt-3">
+                        Currently no Loans
+                    </h3>
+                    <Link to={`search`} className="btn btn-primary">
+                        Search for a new book
+                    </Link>
+                    </>
+                }
+            </div>
         </div>
     );
 }
