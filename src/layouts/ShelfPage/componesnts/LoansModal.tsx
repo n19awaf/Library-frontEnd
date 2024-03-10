@@ -50,8 +50,22 @@ export const LoansModal: React.FC<{shelfCurrentLoan: ShelfCurrentLoans, mobile: 
                                         <button data-bs-dismiss="modal" className="list-group-item list-group-item-action" aria-current="true">
                                             Return Book
                                         </button>
+                                        <button data-bs-dismiss="modal" 
+                                            className={props.shelfCurrentLoan.daysLeft < 0 ?
+                                                "list-group-item list-group-item-action inactiveLink" :
+                                                "list-group-item list-group-item-action"
+                                            }>
+                                            {props.shelfCurrentLoan.daysLeft < 0 ?
+                                                "Late dues connot be renewed" : "Renew loan for 7 days"
+                                                }
+                                        </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button className="btn btn-secondary" type="button" data-bs-dismiss="modal">
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>

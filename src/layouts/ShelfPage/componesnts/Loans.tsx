@@ -4,6 +4,7 @@ import ShelfCurrentLoans from "../../../models/ShelfCurrentLoans";
 import { error } from "console";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import { Link } from "react-router-dom";
+import { LoansModal } from "./LoansModal";
 
 export const Loans = () => {
 
@@ -116,6 +117,7 @@ export const Loans = () => {
                                     </div>
                                 </div>
                                 <hr />
+                                <LoansModal shelfCurrentLoan={shelfCurrentLoan} mobile={false}/>
                             </div>
                         ))}
                     </>:
@@ -167,7 +169,7 @@ export const Loans = () => {
                                                 }
                                                 <div className="list-group mt-3">
                                                     <button className="list-group-item list-group-item-action" aria-current="true"
-                                                        data-bs-toggle="#mobilemodal" data-bs-target={`#modal${shelfCurrentLoan.book.id}`}>
+                                                        data-bs-toggle="modal" data-bs-target={`#mobilemodal${shelfCurrentLoan.book.id}`}>
                                                             Manage Loan 
                                                         </button>
                                                         <Link to={`search`} className="list-group-item list-group-item-action">
@@ -183,9 +185,9 @@ export const Loans = () => {
                                                 Leave a review
                                             </Link>
                                         </div>
-                                    </div>
-                                
+                                    </div>                               
                                 <hr />
+                                <LoansModal shelfCurrentLoan={shelfCurrentLoan} mobile={true} />
                             </div>
                         ))}
                     </>:
