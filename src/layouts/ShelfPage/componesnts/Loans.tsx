@@ -30,7 +30,7 @@ export const Loans = () => {
                 const shelfCurrentLoansResponse = await fetch(url, requestOptions);
                 if (!shelfCurrentLoansResponse.ok) {
                     throw new Error("something went wrong");
-                }
+                } 
                 const shelfCurrentLoansResponseJson = await shelfCurrentLoansResponse.json();
                 setShelfCurrentLoans(shelfCurrentLoansResponseJson);
             }
