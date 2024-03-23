@@ -3,6 +3,7 @@ import { error } from "console";
 import { useEffect, useState } from "react";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import MessageModel from "../../../models/MessageModel";
+import { Pagination } from "../../Utils/Pagination";
 
 export const Messages = () => {
 
@@ -26,14 +27,14 @@ export const Messages = () => {
                     headers:{
                         Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
                         'Content-type':'application/json'
-                    },
+                    }
                 };
                 const messagesResponse = await fetch(url, requestOptions);
                 if (!messagesResponse.ok) {
                     throw new Error("Something went Wrong");
                 }
                 const messagesResponseJson = await messagesResponse.json();
-                setMessages(messagesResponseJson._embedded.message);
+                setMessages(messagesResponseJson._embedded.messages);
                 setTotalPages(messagesResponseJson.page.totalPages);
             }
             setIsLoadingMessages(false);
@@ -44,7 +45,7 @@ export const Messages = () => {
             setHttpError(error.message);
         })
         window.scroll(0, 0);
-    },[authState, currentPage])
+    },[authState, currentPage]);
 
     if (isLoadingMessage) {
         return(
@@ -64,5 +65,37 @@ export const Messages = () => {
 
 
 
-    return();
+    return(
+        <div className="mt-2">
+            {messages.length > 0 ?
+                <>
+                    <h5>Current Q/A:</h5>
+                    {messages.map(message =>(
+                        <div key={message.id}>
+                            <div className="card mt-2 shadow p-3 bg-body rounded">
+                                <h5>Case #{message.id} : {message.title}</h5>
+                                <h6>{message.userEmail}</h6>
+                                <p>{message.question}</p>
+                                <hr />
+                                <div>
+                                    <h5>Response:</h5>
+                                    {message.response && message.adminEmail ?
+                                        <>
+                                            <h6>{message.adminEmail} (admin)</h6>
+                                            <p>{message.response}</p>
+                                        </>
+                                        :
+                                        <p><i>Pending response from administration. please be patient.</i></p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </>
+                :
+                <h5>All questions you submit will be shown here</h5>
+            }
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />}
+        </div>
+    );
 }
