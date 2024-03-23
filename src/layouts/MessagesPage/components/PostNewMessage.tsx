@@ -40,11 +40,6 @@ export const PostNewMessage = () => {
 
     return(
         <div className="card mt-3">
-            {displaySuccess && 
-                <div className="alert alert-success" role="alert">
-                    Question added successfully
-                </div>
-            }
             <div className="card-header">
                 Ask question to luv 2 Read Admin
             </div>
@@ -55,6 +50,11 @@ export const PostNewMessage = () => {
                             All fields must be filled out
                         </div>
                     }
+                    {displaySuccess && 
+                        <div className="alert alert-success" role="alert">
+                            Question added successfully
+                        </div>
+            }
                     <div className="mt-3">
                         <label htmlFor="" className="form-label">Title :</label>
                         <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Title"
