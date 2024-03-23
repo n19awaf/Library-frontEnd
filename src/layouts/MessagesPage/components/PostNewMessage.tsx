@@ -27,15 +27,20 @@ export const PostNewMessage = () => {
                         </div>
                     }
                     <div className="mt-3">
-                        <label htmlFor="" className="form-label">Title</label>
+                        <label htmlFor="" className="form-label">Title :</label>
                         <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Title"
                             onChange={e => setTitle(e.target.value)} value={title}/>
                     </div>
                     <div className="mp-3">
-                    <label htmlFor="" className="form-label">Question</label>
+                    <label htmlFor="" className="form-label">Question :</label>
                     <textarea className="form-control" id="exampleFormControlInput1" rows={3} onChange={e => setQuestion(e.target.value)} value={question}>
-                        
+
                     </textarea>
+                    </div>
+                    <div>
+                        <button type="button" className="btn btn-primary mt-3">
+                            Submit Question
+                        </button>
                     </div>
                 </form>
             </div>
