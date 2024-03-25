@@ -106,7 +106,7 @@ export const AdminMessages = () => {
                 <>
                     <h5>Pending Q/A:</h5>
                     {messages.map(message => (
-                        <AdminMessage meesage={message} key={message.id}/>
+                        <AdminMessage meesage={message} key={message.id} submitResponseToQuestion={submitResponseToQuestion}/>
                     ))}
                 </>
                 :

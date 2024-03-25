@@ -6,6 +6,15 @@ export const AdminMessage: React.FC<{meesage: MessageModel, submitResponseToQues
     const [displayWarning, setDisplayWarning] = useState(false);
     const [response, setResponse] = useState('');
 
+    function submitBtn() {
+        if (props.meesage.id !==null && response !== '') {
+            props.submitResponseToQuestion(props.meesage.id, response);
+            setDisplayWarning(false);
+        }else{
+            setDisplayWarning(true);
+        }
+    }
+
 
     return(
         <div key={props.meesage.id}>
@@ -27,7 +36,7 @@ export const AdminMessage: React.FC<{meesage: MessageModel, submitResponseToQues
                             <textarea className="form-control" id="exampleFormControlTextareal"  rows={3} onChange={e => setResponse(e.target.value)} value={response}></textarea>
                         </div>
                         <div>
-                            <button type="button" className="btn btn-primary mt-3">Submit Response</button>
+                            <button type="button" className="btn btn-primary mt-3" onClick={submitBtn}>Submit Response</button>
                         </div>
                     </form>
                 </div>
