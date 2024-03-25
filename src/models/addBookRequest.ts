@@ -1,4 +1,4 @@
-class addBookRequest {
+class AddBookRequest {
     title: string;
     author: string;
     description: string;
@@ -14,3 +14,5 @@ class addBookRequest {
         this.category = category;
     }
 }
+
+export default AddBookRequest;
