@@ -53,9 +53,11 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
                 </div>
                 <div className="mt-3 col-md-1">
                     <div className="d-flex justify-content-center">
-                        
+                        <div className="m-1 btn btn-md btn-danger">Delete</div>
                     </div>
                 </div>
+                <button className="m1 btn btn-md main-color text-white">Add Quantity</button>
+                <button className="m1 btn btn-md btn-warning">Decrease Quantity</button>
             </div>
         </div>
     );
