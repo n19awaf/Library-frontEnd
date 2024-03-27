@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
 import { useOktaAuth } from "@okta/okta-react";
 
-export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) => {
+export const ChangeQuantityOfBooks: React.FC<{book: BookModel, deleteBook: any}> = (props, key) => {
     const {authState} = useOktaAuth();
     const [quantity, setQuantity] = useState<number>(0);
     const [remaining, setRemaining] = useState<number>(0);
@@ -53,6 +53,24 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
         
     }
 
+    //Delete Book
+    async function deleteBook() {
+        const url = `http://localhost:8080/api/admin/secure/delete/book/?bookId=${props.book?.id}`;
+        const requestOptions = {
+            method:'DELETE',
+            headers:{
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-type':'application/json'
+            }
+        };
+        const UpdateResponse = await fetch(url, requestOptions);
+        if (!UpdateResponse.ok) {
+            throw new Error("Something went Wrong");
+        }
+        props.deleteBook();
+        
+    }
+
 
     return(
         <div className="card mt-3 shadow p-3 mb-3 bg-body rounded">
@@ -91,7 +109,7 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
                 </div>
                 <div className="mt-3 col-md-1">
                     <div className="d-flex justify-content-center">
-                        <div className="m-1 btn btn-md btn-danger">Delete</div>
+                        <div className="m-1 btn btn-md btn-danger" onClick={deleteBook}>Delete</div>
                     </div>
                 </div>
                 <button className="m1 btn btn-md main-color text-white" onClick={increaseQuantity}>Add Quantity</button>
