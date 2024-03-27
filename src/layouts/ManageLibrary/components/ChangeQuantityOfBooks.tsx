@@ -16,8 +16,9 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
         fetchBooksInState();
     },[]);
 
+    //function for increase quantity
     async function increaseQuantity() {
-        const url = `http://localhost:8080/api/admin/secure/increase/book/quantity/?bookId=${props.book.id}`;
+        const url = `http://localhost:8080/api/admin/secure/increase/book/quantity/?bookId=${props.book?.id}`;
         const requestOptions = {
             method:'PUT',
             headers:{
@@ -31,6 +32,24 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
         }
         setQuantity(quantity + 1);
         setRemaining(remaining + 1)
+        
+    }
+    //function for decrease quantity
+    async function decreaseQuantity() {
+        const url = `http://localhost:8080/api/admin/secure/decrease/book/quantity/?bookId=${props.book?.id}`;
+        const requestOptions = {
+            method:'PUT',
+            headers:{
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-type':'application/json'
+            }
+        };
+        const quantityUpdateResponse = await fetch(url, requestOptions);
+        if (!quantityUpdateResponse.ok) {
+            throw new Error("Something went Wrong");
+        }
+        setQuantity(quantity - 1);
+        setRemaining(remaining - 1)
         
     }
 
@@ -75,8 +94,8 @@ export const ChangeQuantityOfBooks: React.FC<{book: BookModel}> = (props, key) =
                         <div className="m-1 btn btn-md btn-danger">Delete</div>
                     </div>
                 </div>
-                <button className="m1 btn btn-md main-color text-white">Add Quantity</button>
-                <button className="m1 btn btn-md btn-warning">Decrease Quantity</button>
+                <button className="m1 btn btn-md main-color text-white" onClick={increaseQuantity}>Add Quantity</button>
+                <button className="m1 btn btn-md btn-warning" onClick={decreaseQuantity}>Decrease Quantity</button>
             </div>
         </div>
     );
