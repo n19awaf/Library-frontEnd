@@ -8,5 +8,6 @@ class PaymentInfoRequest {
         this.currency = currency;
         this.receipyEmail = receipyEmail;
     }
-
 }
+
+export  default PaymentInfoRequest;
