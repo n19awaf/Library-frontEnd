@@ -13,6 +13,7 @@ import { ReviewListPage } from './layouts/BookCheckoutPage/ReviewListPage/Review
 import { ShelfPage } from './layouts/ShelfPage/ShelfPage';
 import { Messagespage } from './layouts/MessagesPage/Messagespage';
 import { ManageLibraryPage } from './layouts/ManageLibrary/ManageLibraryPage';
+import { PaymentPage } from './layouts/PaymentPage/PaymentPage';
 
 
 
@@ -61,6 +62,8 @@ export const App = () =>{
               <SecureRoute path='/shelf'><ShelfPage/></SecureRoute>
               <SecureRoute path='/message'><Messagespage/></SecureRoute>
               <SecureRoute path='/admin'><ManageLibraryPage/></SecureRoute>
+              <SecureRoute path='/admin'><ManageLibraryPage/></SecureRoute>
+              <SecureRoute path='/fees'><PaymentPage/></SecureRoute>
           </Switch>
         </div>
         <Footer/>

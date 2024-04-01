@@ -1,8 +1,8 @@
 import { useOktaAuth } from "@okta/okta-react";
 import { useEffect, useState } from "react";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
-import { error } from "console";
 import { CardElement } from "@stripe/react-stripe-js";
+import { Link } from "react-router-dom";
 
 export const PaymentPage = () => {
 
@@ -23,7 +23,7 @@ export const PaymentPage = () => {
                         'Content-type':'application/json'}
                 };
                 const paymentResponse = await fetch(url, requestOptions);
-                if (paymentResponse.ok) {
+                if (!paymentResponse.ok) {
                     throw new Error("Soemthing went wrong");
                 }
                 const paymentResponseJson = await paymentResponse.json();
@@ -35,7 +35,7 @@ export const PaymentPage = () => {
             setLoadingFees(false);
             setHttpError(error.meesage);
         })
-    },[authState])
+    },[authState]);
 
     if (loadingFees) {
         <SpinnerLoading/>
@@ -50,23 +50,27 @@ export const PaymentPage = () => {
     }
 
     return(
-        <div className="container">
-            {fees > 0 &&
-                <div className="card mt-3">
-                    <h5 className="card-header">Fees pending: <span className="text-danger">${fees}</span></h5>
-                    <div className="card-body">
-                        <h5 className="card-title mb-3">Credit Card</h5>
-                        <CardElement id={card-element} />
-                        <button disabled={submitDisabled} type="button" className="btn btn-md main-color text-white mt-3">
-                            Pay fees
-                        </button>
-                    </div>
-                </div>}
-                {fees === 0 &&
-                    <div className="mt-3">
-                        <h5>You have no fees!</h5>
-                    </div>
-                }
+        <div className='container'>
+            {fees > 0 && <div className='card mt-3'>
+                <h5 className='card-header'>Fees pending: <span className='text-danger'>${fees}</span></h5>
+                <div className='card-body'>
+                    <h5 className='card-title mb-3'>Credit Card</h5>
+                    <CardElement id='card-element' />
+                    <button disabled={submitDisabled} type='button' className='btn btn-md main-color text-white mt-3'>
+                        Pay fees
+                    </button>
+                </div>
+            </div>}
+
+            {fees === 0 && 
+                <div className='mt-3'>
+                    <h5>You have no fees!</h5>
+                    <Link type='button' className='btn main-color text-white' to='search'>
+                        Explore top books
+                    </Link>
+                </div>
+            }
+            {submitDisabled && <SpinnerLoading/>}
         </div>
     );
 }
