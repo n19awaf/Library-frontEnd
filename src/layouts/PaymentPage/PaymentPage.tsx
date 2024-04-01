@@ -123,7 +123,7 @@ export const PaymentPage = () => {
                 <div className='card-body'>
                     <h5 className='card-title mb-3'>Credit Card</h5>
                     <CardElement id='card-element' />
-                    <button disabled={submitDisabled} type='button' className='btn btn-md main-color text-white mt-3'>
+                    <button disabled={submitDisabled} type='button' className='btn btn-md main-color text-white mt-3' onClick={checkout}>
                         Pay fees
                     </button>
                 </div>
