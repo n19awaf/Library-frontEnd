@@ -61,8 +61,12 @@ export const PaymentPage = () => {
                             Pay fees
                         </button>
                     </div>
-                </div>
-            }
+                </div>}
+                {fees === 0 &&
+                    <div className="mt-3">
+                        <h5>You have no fees!</h5>
+                    </div>
+                }
         </div>
     );
 }
