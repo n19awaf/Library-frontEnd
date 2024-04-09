@@ -53,3 +53,17 @@ background-color: #0e76a8 ;
     pointer-events: none;
     cursor: default;
 }
+/*Nav bar*/
+.link-style { 
+    color:#333; /* Change link color */
+    text-decoration: none; /* Add underline */
+    font-weight: bold; /* Make text bold */
+    /* Add more styles as needed */
+}
+
+.register{
+    border-bottom: 2px solid #a9a9ab;
+    padding-bottom: 10px;
+    color:#5c5c5c;
+
+}

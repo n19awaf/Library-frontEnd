@@ -14,6 +14,8 @@ import { ShelfPage } from './layouts/ShelfPage/ShelfPage';
 import { Messagespage } from './layouts/MessagesPage/Messagespage';
 import { ManageLibraryPage } from './layouts/ManageLibrary/ManageLibraryPage';
 import { PaymentPage } from './layouts/PaymentPage/PaymentPage';
+import { SignIn } from './layouts/SginIn/SginIn';
+
 
 
 
@@ -54,6 +56,9 @@ export const App = () =>{
             </Route>
             <Route path='/checkout/:bookId'>
               <BookCheckoutPage/>
+            </Route>
+            <Route path='/register'>
+            <SignIn/>
             </Route>
             <Route path='/login'
               render={() => <LoginWedget config={oktaConfig}/>}

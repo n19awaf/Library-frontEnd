@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { AdminMessages } from "./components/AdminMessages";
 import { AddNewBook } from "./components/AddNewBook";
 import { ChangeQuantityOfBook } from "./components/ChangeQuantityOfBook";
+import { ManageUser } from "./components/ManageUser";
 
 
 export const ManageLibraryPage = () => {
@@ -54,6 +55,11 @@ export const ManageLibraryPage = () => {
                                 aria-selected="false">
                                     Messages
                         </button>
+                        <button onClick={messagesClickFunction}  className="nav-link" id="nav-Mangeuser-tab" data-bs-toggle="tab"
+                            data-bs-target="#nav-user" type="button" role="tab" aria-controls="nav-user"
+                                aria-selected="false">
+                                    Manage Users
+                        </button>
                     </div>
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
@@ -65,6 +71,9 @@ export const ManageLibraryPage = () => {
                     </div>
                     <div className="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
                         {messagesClick ? <AdminMessages/> : <></> }
+                    </div>
+                    <div className="tab-pane fade" id="nav-user" role="tabpanel" aria-labelledby="nav-Mangeuser-tab">
+                        {messagesClick ? <ManageUser/> : <></> }
                     </div>
                 </div>
             </div>
