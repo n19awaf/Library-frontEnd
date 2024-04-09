@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
-
-
 export const SignIn = () => {
-
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
@@ -13,7 +9,7 @@ export const SignIn = () => {
         email: ""
     });
     const [successMessage, setSuccessMessage] = useState("");
-
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -21,14 +17,17 @@ export const SignIn = () => {
             ...formData,
             [name]: value
         });
-        
     };
-    
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Check if any field is empty
+        if (!formData.firstname || !formData.lastname || !formData.password || !formData.email) {
+            setErrorMessage("Please fill out all fields.");
+            return;
+        }
         try {
-            const response = await fetch(`${process.env.REACT_APP_API}/user` ,{
+            const response = await fetch(`${process.env.REACT_APP_API}/user`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -46,19 +45,31 @@ export const SignIn = () => {
             });
             setSuccessMessage("Registration successful!");
             // Handle success, e.g., redirect to login page
+            setErrorMessage(""); // Clear error message
         } catch (error) {
             console.error("Error:", error);
         }
     };
 
     return (
-        <div style={{ width: "900px" }} className="container mt-3 mb-3">
+        <div className="container mt-3 mb-3">
             <div className="row">
-                <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+                <div className="col-md-8 col-lg-6 offset-md-2 offset-lg-3 border rounded p-4 mt-2 shadow">
                     <h3 className="text-center m-4 register">Register User</h3>
+                    {successMessage && (
+                        <div className="alert alert-success" role="alert">
+                            {successMessage}
+                        </div>
+                        
+                    )}
+                    {errorMessage && (
+                        <div className="alert alert-danger" role="alert">
+                            {errorMessage}
+                        </div>
+                    )}
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="name" className="form-label" style={{ fontSize: "1.1rem" }}>First Name:</label>
+                            <label htmlFor="name" className="form-label">First Name:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -66,11 +77,10 @@ export const SignIn = () => {
                                 name="firstname"
                                 value={formData.firstname}
                                 onChange={handleChange}
-                                style={{ height: "45px" }}
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="username" className="form-label" style={{ fontSize: "1.1rem" }}>Last Name:</label>
+                            <label htmlFor="username" className="form-label">Last Name:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -78,11 +88,10 @@ export const SignIn = () => {
                                 name="lastname"
                                 value={formData.lastname}
                                 onChange={handleChange}
-                                style={{ height: "45px" }}
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password" className="form-label" style={{ fontSize: "1.1rem" }}>Password:</label>
+                            <label htmlFor="password" className="form-label">Password:</label>
                             <input
                                 type="password"
                                 className="form-control"
@@ -90,11 +99,10 @@ export const SignIn = () => {
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                style={{ height: "45px" }}
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="email" className="form-label" style={{ fontSize: "1.1rem" }}>Email:</label>
+                            <label htmlFor="email" className="form-label">Email:</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -102,22 +110,15 @@ export const SignIn = () => {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                style={{ height: "45px" }}
                             />
                         </div>
-                        <Link to="/login" className="link-style">Already have an account?</Link>
-                        {successMessage && (
-                        <div className="alert alert-success mt-3" role="alert">
-                            {successMessage}
+                        <div className="mb-3 text-center">
+                            <Link to="/login" className="link-style">Already have an account?</Link>
                         </div>
-                    )}
-                        <div className="mt-3 d-flex justify-content-center align-items-center">
-                            <button type="submit" className="btn main-color text-white" style={{ width: "300px", height: "50px" }}>
-                                Register
-                            </button>
+                        <div className="d-grid gap-2">
+                            <button type="submit" className="btn main-color text-white">Register</button>
                         </div>
                     </form>
-                    
                 </div>
             </div>
         </div>
