@@ -12,9 +12,11 @@ export const Navbar = () => {
     const handleLogout = async () => oktaAuth.signOut();
 
     return(
-        <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
+        <nav className='navbar navbar-expand-lg navbar-dark navmain-color py-1'>
         <div className="container-fluid">
-            <span className='navbar-brand'>Luv 2 Read</span>
+            <NavLink to="/home" className='navbar-brand'><img
+                src={require("./../../Images/PublicImages/logo22.png")} width="110" height="70" alt="logo"/></NavLink>
+            <span className='navbar-brand'>Nono 2 Read</span>
             <button className="navbar-toggler" type='button' data-bs-toggle='collapse' data-bs-target='#navbarNavDropedown' aria-controls='navbarNavDropedown'
             aria-expanded='false' arai-label='Toggle Navigation'>
             <span className='navbar-toggler-icon'></span>
