@@ -12,7 +12,7 @@ export const Navbar = () => {
     const handleLogout = async () => oktaAuth.signOut();
 
     return(
-        <nav className='navbar navbar-expand-lg navbar-dark navmain-color py-1'>
+        <nav className='navbar navbar-expand-lg navbar-dark main-color py-1'>
         <div className="container-fluid">
             <NavLink to="/home" className='navbar-brand'><img
                 src={require("./../../Images/PublicImages/logo22.png")} width="110" height="70" alt="logo"/></NavLink>
@@ -49,8 +49,8 @@ export const Navbar = () => {
             <ul className="navbar-nav ms-auto">
                 {!authState.isAuthenticated ?
                     <li className="nav-item m-1">
-                    <Link type='button' to='/register' className='btn btn-outline-light btn-block mx-2'>Register</Link>
-                    <Link type='button' to='/login' className='btn btn-outline-light btn-block mx-2'>Sign in</Link>
+                    <Link type='button' to='/register' className='btn btn-outline-light btn-block mx-2 main-color-dell'>Register</Link>
+                    <Link type='button' to='/login' className='btn btn-outline-light btn-block mx-2 main-color-dell'>Sign in</Link>
                     </li>
                 :
                 <li>

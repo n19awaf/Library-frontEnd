@@ -18,12 +18,14 @@
 }
 
 .main-color {
-        background-color:  #042364 ;
+        background-color:  #0a152d ;
+
+}
+.main-color-dell {
+    color: #f6ebda;
 }
 
-.navmain-color {
-    background-color:   #0a152d ;
-}
+
 
 .col-image-left {
     background-image: url("./Images/PublicImages/image-4.jpg");
@@ -64,6 +66,8 @@
     font-weight: bold; /* Make text bold */
     /* Add more styles as needed */
 }
+
+
 
 .register{
     border-bottom: 2px solid #a9a9ab;

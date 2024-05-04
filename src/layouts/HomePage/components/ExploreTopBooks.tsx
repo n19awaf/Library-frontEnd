@@ -12,9 +12,8 @@ export const ExploreTopBooks = () => {
                     <h1 className="display-5 fw-bold">Find your next Adventure</h1>
                     <p className="col-md-8 fs-4">Where would you like to go next?</p>
                     
-                    <Link  type="button" to="/search" className="btn main-color btn-lg text-white">Explore top books</Link>
+                    <Link  type="button" to="/search" className="btn main-color btn-lg main-color-dell">Explore top books</Link>
                 </div>
-
             </div>
         </div>
     );
